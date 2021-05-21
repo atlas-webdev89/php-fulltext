@@ -13,7 +13,6 @@ ini_set('error_log', '/var/log/php/php_errors.log');
 require_once 'vendor/autoload.php';
 require_once 'app/config/config.php';
 
-
 \Library\UsageMemory::start();
 $time_load_page = \Library\Timer::getInstanse('start');
 
@@ -36,7 +35,6 @@ $config = [
 
 $app = new \Slim\App($config);
 
-
 //DI
 $container = \Core\Bootloader\Bootstrap::registerFabrica($app);
 
@@ -52,7 +50,6 @@ $container = \Core\Bootloader\Bootstrap::registerFabrica($app);
 
 //Добавляем маршруты
 $container->routers->createRoutes($app);
-
 
 //Запуск приложения  
 $app->run();
