@@ -1,0 +1,22 @@
+{
+    "name": "atlas89/app-fulltext",
+    "description": "Application search fulltext on php/mysql",
+    "authors": [
+        {
+            "name": "AtlasComp",
+            "email": "web.dev89@yandex.by",
+            "homepage": "https://github.com/doroshuk89"
+        }
+    ],
+    "require": {
+        "slim/slim": "3.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "app/core",
+            "Model\\": "app/models",
+            "Controller\\": "app/controllers",
+            "Library\\": "app/extensions"  
+        }
+    }
+}
