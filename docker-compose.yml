@@ -1,0 +1,57 @@
+version: '3.1'
+
+services:
+    
+    web-server:
+        image: webdev89/phpdebian
+        restart: always
+        container_name: appfulltext   
+        ports:
+          - 8500:80
+        environment:
+            DB_HOST: db
+            DB_DB: fulltext
+            DB_USER: user
+            DB_PASS: user
+        volumes:
+          - ./src/:/var/www/html
+        depends_on:
+          - db
+        networks:
+          - fulltext
+
+    db:
+        image: mysql:5.7
+        container_name: full_db
+        restart: always
+        ports:
+          - 8501:3306
+        environment:
+          MYSQL_DATABASE: fulltext
+          MYSQL_USER: user 
+          MYSQL_PASSWORD: user
+          MYSQL_ROOT_PASSWORD: root
+        volumes:
+          - Fulltext:/var/lib/mysql
+        networks:
+          - fulltext
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin_fulltext
+        restart: always
+        ports: 
+          - 8502:80
+        environment:
+          PMA_HOST: db
+        depends_on:
+          - db
+        networks:
+          - fulltext
+          
+networks:
+  fulltext:
+    driver: bridge
+
+volumes:
+  Fulltext:
