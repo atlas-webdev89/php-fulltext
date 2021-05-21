@@ -17,8 +17,6 @@ require_once 'app/config/config.php';
 \Library\UsageMemory::start();
 $time_load_page = \Library\Timer::getInstanse('start');
 
-
-
 $config = [
     'settings' => [
         'determineRouteBeforeAppMiddleware' => true,
@@ -38,18 +36,23 @@ $config = [
 
 $app = new \Slim\App($config);
 
+
 //DI
-$container = \Core\Bootloader\Bootstrap::registerFabrica($app->getContainer());
-
-
-echo "<pre>";
-print_r($container['driverDB']);
-echo "</pre>";
+$container = \Core\Bootloader\Bootstrap::registerFabrica($app);
 
 
 
-echo "Потребляемая память - ". \Library\UsageMemory::finish_memory()."<br>";
-echo "максимальное значение памяти " .(\Library\UsageMemory::finish_peak_memory())." байт <br>";
+
+
+//echo "Потребляемая память - ". \Library\UsageMemory::finish_memory()."<br>";
+//echo "максимальное значение памяти " .(\Library\UsageMemory::finish_peak_memory())." байт <br>";
 //Время выполения всех sql запросов
 //Время генерации страницы
-echo "Время генерации страницы - ".$time_load_page->finish()." сек<br>";
+//echo "Время генерации страницы - ".$time_load_page->finish()." сек<br>";
+
+//Добавляем маршруты
+$container->routers->createRoutes($app);
+
+
+//Запуск приложения  
+$app->run();
