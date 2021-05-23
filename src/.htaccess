@@ -1,4 +1,6 @@
 RewriteEngine on
+RewriteCond %{REQUEST_URI} ^/?(css|fonts|img|js|images)(/.*)?$ [NC]
+RewriteRule ^.*$ /app/public/%1%2 [L]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule . app.php [L]

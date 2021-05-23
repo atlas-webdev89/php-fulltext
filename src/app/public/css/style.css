@@ -1,0 +1,8 @@
+#main-form {
+    width: 100%;
+}
+.has-error {
+    border-color: #ff8286!important;
+    color: #ff8286;
+}
+
