@@ -34,14 +34,13 @@
 	});
         
         function urlencodeForm(form) {
-		let form_encode = $(form).serializeArray();
+                    let form_encode = $(form).serialize();
 		ajaxTransferUrlEncode(form, form_encode);
 	}
         
         /*Функция передачи данных формы*/
 	function ajaxTransferUrlEncode(forma, dataForm) {
-		
-                let uri = 'scripts/bankomat.php';
+                let uri = '/';
                 let form =$(forma);
                 let elem = form.closest('div');
 

@@ -5,19 +5,14 @@ use Core\Model\MainModel;
 
 class IndexModel extends MainModel {
     
-    public function getMessage () {
-        return "IndexMOdel";
-    }
-    
     //Get user data from table use param login and password
-    public function getFulltext() {
+    public function getFulltext($search) {
        $type = 'arraydata';
-       $sql =   "SELECT * FROM `MyText` "     
-       . "WHERE `id` = :id";
-                $data_array=array(
-                    'id' => 1,
-                );
-                $result =  $this->driver->query($sql, $type, $data_array); 
+       $sql =   "SELECT * FROM MyText WHERE MATCH (text) AGAINST (:search) LIMIT 10";     
+            $data_array=array(
+                     'search' => $search,
+                 );
+            $result =  $this->driver->query($sql, $type, $data_array); 
         return $result;  
     }
 }
