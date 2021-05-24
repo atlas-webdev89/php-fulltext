@@ -42,7 +42,7 @@
 	function ajaxTransferUrlEncode(forma, dataForm) {
                 let uri = '/';
                 let form =$(forma);
-                let elem = form.closest('div');
+                let elem = form.closest('div.row');
 
                 $.ajax({
 			type: 'POST',
@@ -64,21 +64,19 @@
 						//Включение кнопки и элементов формы
 						form.find('button, input, textarea').removeAttr('disabled');
                                                     //Формируем полученный результат
-                                                    elem.append("<div class='msg col-md-12 mt-3'><p class='m-3 '>Ответ:</p></div>");
-                                                    let content = '<table class="table table-striped">';
-                                                    content+='<thead><tr><th>Номинал</th><th>Количество</th></tr></thead>';
-                                                    content+='<tbody>';
-                                                        for(var key in data.message){
-                                                            content+='<tr><td>'+key+'</td><td>'+data.message[key]+'</td></tr>';
-                                                        }
-                                                    content+='</tbody></table>';
+                                                    elem.append("<div class='msg col-md-12 mt-3'><p class='m-3 '>Результат:</p></div>");
+                                                    let content = '<div>';
+                                                       data.data.forEach(function (item, i) {
+                                                           content+='<li> <a target="_blank" href = "/text/id/'+item.id+'">'+item.text.substring(0, 250)+'...</a></li>';
+                                                       });
+                                                    content+='</div>';
                                                 $('.msg').append(content);                                                                
 					}else if(data.status == false) {
 						//Включение кнопки и элементов формы
 						form.find('button, input, textarea').removeAttr('disabled');
 						//Формируем полученный результат
-                                                elem.append("<div class='msg col-md-12 mt-3'><p class='m-3 '>Ответ:</p></div>");
-						let content = '<div class="m-3 p-3 error-msg"><p class="m-0">'+data.message+'</p><div>';
+                                                elem.append("<div class='msg col-md-12 mt-3'><p class='m-3 '>Результат:</p></div>");
+						let content = '<div class="mt-3 pt-3 error-msg"><p class="m-0">'+data.data+'</p><div>';
 						$('.msg').append(content);
 					}
 				}
@@ -88,7 +86,7 @@
 					//Включение кнопки и элементов формы
 					form.find('button,input, textarea').removeAttr('disabled');
                                         //Формируем полученный результат
-                                                elem.append("<div class='msg col-md-12 mt-3'><p class='m-3 '>Ответ:</p></div>");
+                                                elem.append("<div class='msg col-md-12 mt-3'><p class='m-3 '>Результат:</p></div>");
 						let content = '<div class="m-3 p-3 error-msg"><p>Превышено время ожидания</p><div>';
 						$('.msg').append(content);
 				}

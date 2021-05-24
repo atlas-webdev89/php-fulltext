@@ -13,9 +13,8 @@ class DisplayController extends MainController{
             $this->view->render($response, 'index.php',
                     [
                         "title_page" => $this->title_page, 
-                        "title_block" => $this->title_block, 
+                        "main_section" => $this->main_section,
                     ]
                 );  
- 
         } 
 }
